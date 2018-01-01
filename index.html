@@ -1,0 +1,75 @@
+<script src="http://netpie.io/microgear.js"></script>
+
+<script>
+    const APPKEY = "hCzsNRAbH3PwIbJ";
+	const APPSECRET = "wnPnRmFfdOU7vaftUI523ePl5";
+	const APPID = "PROJECT42";
+
+	var microgear = Microgear.create({
+		gearkey: APPKEY,
+		gearsecret: APPSECRET
+	});
+
+    microgear.on('message',function(topic,data) {
+        if(data =="ON")document.getElementById("CH1").innerHTML = "ON";
+        if(data =="OFF")document.getElementById("CH1").innerHTML = "OFF";
+       
+    });
+
+    microgear.on('connected', function() {
+        microgear.setname('controllerplug');
+        document.getElementById("data").innerHTML = "<FONT color=#00BB00>ONLINE</FONT>";
+    });
+ microgear.resettoken();
+	microgear.connect(APPID);
+//------------function control channel 1--------------------//
+    function ch1_on() 
+    {
+        microgear.chat('pieplug','ON');    //send "A" charactor for on command channel1
+    }
+    function ch1_off() 
+    {
+        microgear.chat('pieplug','OFF');    //send "a" charactor for off command channel1
+    }
+
+</script>
+
+<style>
+table, th, td {
+    border: 1px solid black;
+}
+</style>
+
+</<!DOCTYPE html>
+<html>
+<head>
+    <title>4 LED Web control (esp8266)</title>
+</head>
+<body>
+<div id="data" align=right><FONT COLOR=#DDDDDD>OFFLINE</FONT></div> <br>
+<center>
+<h1> ESP8266 control 4 LED on web</h1>
+
+<table>
+    <!-- Header table-->
+    <tr>
+        <th>Channel</th>
+        <th>Control</th>
+        <th>Status</th>    
+    </tr>
+    <!-- ###################### List channel 1  display ######################## --> 
+    <tr>
+        <td>CH-1</td>
+        <td>
+                <button type="button" style="height:100px;width:100px;font-size:40px" autofocus onclick="ch1_on()">ON</button>
+                <button type="button" style="height:100px;width:100px;font-size:40px" autofocus onclick="ch1_off()">OFF</button>
+        </td>
+        <td><div id="CH1"> OFF </div></td>
+    </tr>
+    
+</table>
+<FONT COLOR=#00bfff>By Witwasin Suwannajit </FONT></br>
+<FONT COLOR=#00aaff>PORJECT42 </FONT></br>
+</center>
+</body>
+</html>>
